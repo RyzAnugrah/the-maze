@@ -43,11 +43,11 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Option(){
-        Debug.Log("Option...");
+        
     }
 
     public void Help(){
-        Debug.Log("Help...");
+        
     }
 
     public void Quit(){
