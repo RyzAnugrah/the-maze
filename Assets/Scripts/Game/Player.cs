@@ -45,6 +45,16 @@ public class Player : MonoBehaviour
         {
             Next();
         }
+        else if (other.gameObject.tag == "Bottle")
+        {
+            if (currentHealth > 0 && currentHealth < 5)
+            {
+                currentHealth += 1;
+                healthBar.SetHealth(currentHealth);
+                Destroy(GameObject.FindWithTag("Bottle"));
+                Debug.Log("Got Health");
+            }
+        }
     }
 
     public void TakeDamage(int damage)
