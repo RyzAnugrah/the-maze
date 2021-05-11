@@ -4,50 +4,50 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController controller;  
+    public CharacterController controller;
 
-    public float speed = 15f;    // set kecepatan normal
-    public float sprintSpeed = 25f; // set kecepatan saat berlari
-    public float walkSpeed = 15f;    // set kecepatan saat kembali normal
-    public float gravity = -49.05f; // set gravity dibebaskan (-9.81 * 5)
-    public float jumpHeight = 3f;   // set ketinggian lompat
+    public float speed = 15f;   
+    public float sprintSpeed = 25f; 
+    public float walkSpeed = 15f;    
+    public float gravity = -49.05f; 
+    public float jumpHeight = 3f;  
 
     public Transform groundCheck;   
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
-    Vector3 velocity;   // kecepatan dalam skala vektor
-    bool isGrounded;    // cek apakah karakter menapak tanah
+    Vector3 velocity;   
+    bool isGrounded;   
 
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); // mengecek apakah pemain berdiri di atas bidang yang baru 
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); 
 
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
 
-        float x = Input.GetAxis("Horizontal");  // input
-        float z = Input.GetAxis("Vertical");    // input
+        float x = Input.GetAxis("Horizontal"); 
+        float z = Input.GetAxis("Vertical");    
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * speed * Time.deltaTime); // gerakan karakter dengan WASD (8 arah)
+        controller.Move(move * speed * Time.deltaTime); 
 
-        if (Input.GetButtonDown("Jump") && isGrounded)  // jika tombol Space ditekan dan player menapak tanah
+        if (Input.GetButtonDown("Jump") && isGrounded)  
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);    // player akan melompat
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);    
         }
 
-        if (Input.GetKey(KeyCode.LeftShift) && isGrounded)  // jika tombol Shift ditekan atau ditahan dan player menapak tanah
-            speed = sprintSpeed;    // player berlari
+        if (Input.GetKey(KeyCode.LeftShift) && isGrounded)  
+            speed = sprintSpeed;   
         else
-            speed = walkSpeed;  // player berjalan normal
+            speed = walkSpeed;  
 
-        velocity.y += gravity * Time.deltaTime; // mengatur airtime player agar lebih nyata
+        velocity.y += gravity * Time.deltaTime; 
 
-        controller.Move(velocity * Time.deltaTime); // agar player dapat bergerak
+        controller.Move(velocity * Time.deltaTime); 
     }
 }
