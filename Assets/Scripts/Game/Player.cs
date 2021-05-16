@@ -15,6 +15,10 @@ public class Player : MonoBehaviour
     public static bool GameIsOver = false;
     public static bool GameIsNext = false;
 
+    public float timeBetweenAttacks;
+
+    bool alreadyAttacked;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -41,6 +45,17 @@ public class Player : MonoBehaviour
             TakeDamage(1);
             Debug.Log("Spike Damage");
         }
+        else if (other.gameObject.tag == "Enemy")
+        {
+            if (!alreadyAttacked)
+            {
+                TakeDamage(1);
+                Debug.Log("Enemy Attacked");
+
+                alreadyAttacked = true;
+                Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            }
+        }
         else if (other.gameObject.tag == "Finish")
         {
             Next();
@@ -55,6 +70,11 @@ public class Player : MonoBehaviour
                 Debug.Log("Got Health");
             }
         }
+    }
+
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
     }
 
     public void TakeDamage(int damage)
