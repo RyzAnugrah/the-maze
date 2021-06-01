@@ -9,6 +9,7 @@ public class Hint : MonoBehaviour
     public Text interactText;
     public Image interactPopUp;
     public Image interactPopUpImage;
+    public AudioSource boxSound;
 
     private bool interactAllowed;
 
@@ -32,6 +33,7 @@ public class Hint : MonoBehaviour
             interactPopUp.gameObject.SetActive(true);
             interactPopUpImage.gameObject.SetActive(true);
             interactAllowed = true;
+            boxSound.Play();
         }
     }
 

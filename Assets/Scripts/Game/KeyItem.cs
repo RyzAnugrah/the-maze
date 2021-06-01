@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class KeyItem : MonoBehaviour
 {
     public Image keyHUD;
+    public AudioSource keySound;
 
     public static int keyCount;
 
@@ -25,6 +26,7 @@ public class KeyItem : MonoBehaviour
             keyCount += 1;
             Destroy(gameObject);
             keyHUD.gameObject.SetActive(true);
+            keySound.Play();
             Debug.Log("Key Taken");
             Debug.Log("Key: " + keyCount);
         }

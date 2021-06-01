@@ -8,6 +8,7 @@ public class KeyDoor : MonoBehaviour
     public GameObject popUp2;
 
     private Animator animator;
+    public AudioSource doorSound;
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class KeyDoor : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     animator.SetTrigger("isOpened");
+                    doorSound.Play();
                     KeyItem.keyCount--;
                     Debug.Log("Door Opened");
                     Debug.Log("Key: " + KeyItem.keyCount);

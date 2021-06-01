@@ -67,7 +67,17 @@ public class PauseMenu : MonoBehaviour
 
     public void Finish()
     {
+        Time.timeScale = 1f;
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+
+        if (currentLevel >= PlayerPrefs.GetInt("levelIsUnlocked"))
+        {
+            PlayerPrefs.SetInt("levelIsUnlocked", currentLevel - 1);
+        }
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        Debug.Log("LEVEL UNLOCKED!");
     }
 
     public void Restart()

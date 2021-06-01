@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
 
     public GameObject gameOver, gameNext;
 
+    public AudioSource painSound;
+    public AudioSource potionSound;
+
     public static bool GameIsOver = false;
     public static bool GameIsNext = false;
 
@@ -43,13 +46,15 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "Spike")
         {
             TakeDamage(1);
+            painSound.Play();
             Debug.Log("Spike Damage");
         }
         else if (other.gameObject.tag == "Enemy")
         {
-            if (!alreadyAttacked)
+            if (currentHealth > 0 && !alreadyAttacked)
             {
                 TakeDamage(1);
+                painSound.Play();
                 Debug.Log("Enemy Attacked");
 
                 alreadyAttacked = true;
@@ -66,6 +71,7 @@ public class Player : MonoBehaviour
             {
                 currentHealth += 1;
                 healthBar.SetHealth(currentHealth);
+                potionSound.Play();
                 Destroy(GameObject.FindWithTag("Bottle"));
                 Debug.Log("Got Health");
             }

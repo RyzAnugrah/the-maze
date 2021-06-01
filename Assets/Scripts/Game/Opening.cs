@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Opening : MonoBehaviour
 {
     [SerializeField]
-    private float delayBeforeLoading = 25f;
+    private float delayBeforeLoading = 15f;
 
     [SerializeField]
     private string sceneMenuToLoad;

@@ -22,10 +22,16 @@ public class Enemy : MonoBehaviour
     public float timeBetweenAttacks;
     bool alreadyAttacked;
     public GameObject projectile;
+    private Animator animator;
 
     //States
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
+
+    void Start()
+    {
+        animator = GetComponentInParent<Animator>();
+    }
 
     private void Awake()
     {
@@ -72,11 +78,11 @@ public class Enemy : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
+        animator.SetTrigger("isAttacked");
     }
 
     private void AttackPlayer()
     {
-        //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
 
         transform.LookAt(player);
@@ -93,6 +99,12 @@ public class Enemy : MonoBehaviour
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
+
+    void PauseAnimationEvent()
+    {
+        animator.enabled = false;
+    }
+
     private void ResetAttack()
     {
         alreadyAttacked = false;
