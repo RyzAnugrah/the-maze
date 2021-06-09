@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
         Time.timeScale = 0f;
         GameIsOver = true;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     void Next()
@@ -104,5 +105,6 @@ public class Player : MonoBehaviour
         Time.timeScale = 0f;
         GameIsNext = true;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

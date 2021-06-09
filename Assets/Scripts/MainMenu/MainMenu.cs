@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    int levelIsUnlocked;
+    float levelIsUnlocked;
 
     public Button[] buttons;
 
     void Start() 
     {
-        levelIsUnlocked = PlayerPrefs.GetInt("levelIsUnlocked", 1);
+        levelIsUnlocked = PlayerPrefs.GetFloat("levelIsUnlocked", 1f);
 
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -47,7 +47,7 @@ public class MainMenu : MonoBehaviour
 
     public void Credits()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 5);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 6);
     }
 
     public void QuitGame() {

@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     void Start()
     {
+        Cursor.visible = false;
+        
         if (GameIsPaused)
         {
             Resume();
@@ -42,6 +44,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPaused = true;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void Resume()
@@ -50,6 +53,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void Option(){
@@ -70,9 +74,9 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         int currentLevel = SceneManager.GetActiveScene().buildIndex;
 
-        if (currentLevel >= PlayerPrefs.GetInt("levelIsUnlocked"))
+        if (currentLevel >= PlayerPrefs.GetFloat("levelIsUnlocked"))
         {
-            PlayerPrefs.SetInt("levelIsUnlocked", currentLevel - 1);
+            PlayerPrefs.SetFloat("levelIsUnlocked", currentLevel - 1);
         }
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
